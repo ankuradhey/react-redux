@@ -1,4 +1,4 @@
-import { ChangeEvent, FormHTMLAttributes, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { connect } from 'react-redux'
 import './App.css';
 import {addTodoAction, deleteTodoAction} from './redux/actions'
@@ -10,8 +10,8 @@ const App = ({todos, addTodoAction, deleteTodoAction}: any) => {
 
   const submitHandler = (event: SubmitEvent) => {
     event.preventDefault();
-    console.log(event);
     addTodoAction({title: todoText, status: 'not-completed'});
+    setTodoText('');
   }
 
   const inputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ const App = ({todos, addTodoAction, deleteTodoAction}: any) => {
     <>
       <div className="card">
         <form onSubmit={submitHandler}>
-          <input type="text" maxLength={100} onChange={inputChangeHandler} />
+          <input type="text" maxLength={100} value={todoText} onChange={inputChangeHandler} />
           <button type="button" onClick={() => addTodoAction({title: todoText, status: 'not-completed'})}>
             Add Todo
           </button>
